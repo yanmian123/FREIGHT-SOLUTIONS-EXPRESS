@@ -1,0 +1,1414 @@
+:root {
+    --dark-blue: #0b2b53;
+    --light-gray: #f8f9fa;
+}
+
+.card:nth-child(1),
+.card:nth-child(3) {
+    background-color: var(--dark-blue);
+}
+
+.card:nth-child(2) {
+    background-color: var(--light-gray);
+}
+
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 头部样式 */
+/* .header {
+    padding: 20px 0;
+    background-color: #f8f9fa;
+} */
+.header {
+    background-color: #0f123a;
+    box-shadow: 0 3px 4px oklab(27.604% -0.01391 -0.17346 / 0.4);
+}
+
+/* 媒体查询：仅在屏幕宽度≥768px时（通常为电脑端）应用固定定位 */
+@media (min-width: 768px) {
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    /* 电脑端时，给页面主体添加顶部间距，避免内容被固定头部遮挡 */
+
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    height: 80px;
+    border-radius: 10px;
+}
+
+.phone-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.0rem;
+}
+
+.tagline {
+    font-size: 1.0rem;
+    color: #ffffff;
+}
+
+/* 英雄区样式 */
+.hero {
+    padding: 60px 0;
+    /* background-image: url('https://cdn.lugc.link/dd8b249a-8e5d-43f2-ae5e-92f071457dc9/-/format/auto/');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; */
+    /* 关键属性：背景图固定不动 */
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    /* 让英雄区占满整个屏幕高度 */
+    display: flex;
+    align-items: center;
+    /* 垂直居中内容 */
+    /* position: relative; */
+    /* 可选：增强定位稳定性 */
+    /* overflow: hidden; */
+    /* 防止内容溢出影响背景 */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* 黑色半透明遮罩 */
+}
+
+/* 容器样式保持不变，确保内容在固定背景上正常显示 */
+.hero .container {
+    width: 100%;
+    /* 确保容器占满英雄区宽度 */
+
+    /* 保证内容在背景之上 */
+}
+
+.hero h1 {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 3rem;
+    /* 增大公司名称字体 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-top: 150px;
+    /* 增加顶部距离，使内容居中 */
+}
+
+.hero h2 {
+    margin-bottom: 40px;
+    font-weight: 400;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    font-size: 1.5rem;
+}
+
+.quote-form {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.submit-btn {
+    background-color: #0f123a;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.hero-info {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* 服务优势样式 */
+.services {
+    padding: 0 0;
+    background-color: #f8f9fa;
+}
+
+.services h3 {
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 40px;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    background: white
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h4 {
+    margin-bottom: 15px;
+    color: #0f123a;
+    font-size: 1.3rem;
+}
+
+/* 服务类型样式 */
+
+.service-types h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.6rem;
+    color: #2c3e50;
+}
+
+
+.service-item {
+    padding: 0;
+    border-left: 4px solid #ff6b00eb;
+
+    background-color: #f8f9fa;
+}
+
+
+/* 物流服务类型模块整体样式 */
+
+
+.services-grid {
+    display: grid;
+    /* 固定为3列，无论屏幕宽度如何，强制每行3个 */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+
+.service-item:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /*  hover 微动效 */
+    transform: translateY(-3px);
+}
+
+.service-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eaeaea;
+    /* 图标容器背景 */
+    color: #333;
+    /* 图标颜色 */
+    font-size: 28px;
+    /* 图标大小 */
+}
+
+/* 响应式调整服务图标 */
+@media (max-width: 768px) {
+    .service-icon {
+        width: 50px;
+        /* 移动端图标容器宽度（比桌面端小） */
+        height: 50px;
+        /* 移动端图标容器高度 */
+        font-size: 20px;
+        /* 移动端图标大小（同比缩小） */
+        margin-bottom: 15px;
+        /* 减少与下方内容的间距 */
+    }
+}
+
+.service-item h4 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.service-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+
+/* 客户选择理由模块整体样式 */
+.client-choose {
+    padding: 40px 0;
+    background-color: #f9f9f9;
+    /* 浅灰色背景，突出内容 */
+}
+
+/* 标题区域样式 */
+.client-choose .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    /* 与下方内容保持距离 */
+}
+
+.client-choose h2 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    /* 深色调标题，增强对比度 */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 标题下划线样式 */
+.client-choose .divider {
+    width: 80px;
+    height: 3px;
+    background-color: #0f123a;
+    /* 蓝色下划线，呼应主题色 */
+    margin: 0 auto;
+    /* 居中显示 */
+}
+
+/* 理由卡片容器 */
+.reasons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* 自适应列数 */
+    gap: 30px;
+    /* 卡片间距 */
+}
+
+/* 单个理由卡片样式 */
+.reason-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* 轻微阴影，增强层次感 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* 过渡动画 */
+    display: flex;
+    /* 图标与文字横向排列 */
+    align-items: flex-start;
+    /* 顶部对齐 */
+    gap: 20px;
+    /* 图标与文字间距 */
+}
+
+/* 卡片悬停效果 */
+.reason-card:hover {
+    transform: translateY(-5px);
+    /* 轻微上浮 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    /* 加深阴影 */
+}
+
+
+/* 调整理由卡片容器的网格布局 - 仅在PC端生效 */
+@media (min-width: 769px) {
+
+    /* 大于移动端 breakpoint 的屏幕使用2列布局 */
+    .reasons-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 强制2列布局 */
+    }
+
+    /* 让卡片更扁长的样式调整 */
+    .reason-card {
+        padding: 20px 30px;
+        /* 横向padding增加，纵向减少，让卡片更宽扁 */
+        min-height: 180px;
+        /* 固定最小高度，确保卡片足够长 */
+    }
+
+    .reason-content h3 {
+        margin-bottom: 10px;
+        /* 减少标题与内容间距 */
+    }
+
+    .reason-content p {
+        line-height: 1.6;
+        /* 优化行高，让内容更舒展 */
+    }
+}
+
+/* 图标容器样式 */
+.reason-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #e6f0ff;
+    /* 浅蓝色背景，呼应主题 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* 防止图标容器被压缩 */
+}
+
+/* 图标样式 */
+.reason-icon i {
+    font-size: 24px;
+    color: #0f123a;
+    /* 蓝色图标，与主题色一致 */
+}
+
+/* 理由内容区域 */
+.reason-content h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.reason-content p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .client-choose {
+        padding: 60px 0;
+    }
+
+    .client-choose h2 {
+        font-size: 1.1rem;
+    }
+
+    .reason-card {
+        flex-direction: column;
+        /* 小屏幕下图标在上，文字在下 */
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
+/* 物流服务类型模块整体样式 */
+.service-types {
+    padding: 60px 0;
+    background-color: #fff;
+    /* 背景色可按需调整 */
+}
+
+
+.service-item {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    /* 卡片背景色，可调整 */
+}
+
+
+
+
+
+
+
+/* 客户评价样式 */
+.testimonials {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.testimonials h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    color: #2c3e50;
+}
+
+.testimonial-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card .author {
+    margin-top: 15px;
+    font-weight: 700;
+    color: #0f123a;
+}
+
+.stars {
+    height: 36px;
+    margin-top: 10px;
+}
+
+.rating-summary {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+/* 流程说明样式 */
+.process {
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+.process h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.6rem;
+    color: #2c3e50;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.step {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff6b00;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.step h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+/* 联系区域样式 */
+.cta {
+    padding: 60px 0;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+}
+
+.cta h3 {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.phone-btn,
+.form-btn {
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.phone-btn {
+    background-color: white;
+    color: #0f123a;
+}
+
+.form-btn {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.phone-btn:hover,
+.form-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* 页脚样式 */
+.footer {
+    padding: 40px 0;
+    background-color: #2c3e50;
+    color: white;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    height: 100px;
+    filter: invert(1);
+    /* 白色logo */
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+/* 响应式调整 */
+@media (max-width: 763px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+
+    .service-cards,
+    .services-grid {
+        /* 小屏幕下自动改为1列 */
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial-cards,
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* 新增：带图标和背景色的服务卡片模块 */
+.feature-cards {
+    padding: 60px 0;
+    background-color: #fff;
+    /* 模块整体背景，可按需调整 */
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    padding: 30px;
+    border-radius: 8px;
+    color: #fff;
+    /* 文字默认白色，可根据背景色调整 */
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 深色背景卡片的文字颜色（如果需要） */
+.card:nth-child(1),
+.card:nth-child(3),
+.card:nth-child(5) {
+    color: #fff;
+}
+
+/* 浅色背景卡片的文字颜色 */
+.card:nth-child(2),
+.card:nth-child(4) {
+    color: #333;
+}
+
+/* 调整图标容器和图标大小 */
+.card-icon {
+    width: 70px;
+    /* 增大容器尺寸 */
+    height: 70px;
+    /* 其他现有样式保持不变 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+/* 增大图标本身的大小 */
+.card-icon i {
+    font-size: 30px;
+    /* 数值越大，图标越大，可根据需要调整 */
+}
+
+/* 针对不同背景色卡片的图标颜色优化（可选） */
+.card:nth-child(1) .card-icon,
+.card:nth-child(3) .card-icon,
+.card:nth-child(5) .card-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* 深色背景卡片的图标容器 */
+}
+
+.card:nth-child(2) .card-icon,
+.card:nth-child(4) .card-icon {
+    background-color: rgba(0, 0, 0, 0.05);
+    /* 浅色背景卡片的图标容器 */
+}
+
+/* 确保图标颜色与背景对比清晰 */
+.card:nth-child(1) .card-icon i,
+.card:nth-child(3) .card-icon i,
+.card:nth-child(5) .card-icon i {
+    color: white;
+    /* 深色背景用白色图标 */
+}
+
+.card:nth-child(2) .card-icon i,
+.card:nth-child(4) .card-icon i {
+    color: #0b2b53;
+    /* 浅色背景用深色图标 */
+}
+
+/* .card h4 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+} */
+
+/* 报价按钮样式 */
+.quote-btn {
+    background-color: #ff6b00;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+}
+
+.quote-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* 表单容器样式 - 默认隐藏 */
+.quote-form-container {
+    max-width: 600px;
+    margin: 30px auto 0;
+    display: none;
+    /* 默认隐藏表单 */
+    animation: fadeIn 0.5s ease;
+    /* 添加淡入动画 */
+}
+
+/* 表单显示时的样式 */
+.quote-form-container.active {
+    display: block;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* 关于我们区域样式 */
+.about {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.about .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about h3 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.about h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #0f123a;
+}
+
+.about-brief {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 展开/收起按钮样式 */
+.about-toggle {
+    background-color: #0f123a;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    min-width: 200px;
+    letter-spacing: 0.5px;
+}
+
+.about-toggle:hover {
+    background-color: #1a2456;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-toggle.active {
+    background-color: #2c3e50;
+}
+
+/* 详细内容样式 */
+.about-details {
+    /* max-width: 900px; */
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+    animation: fadeIn 0.5s ease;
+    text-align: left;
+    max-width: 90%;
+}
+
+.about-details p {
+    margin-bottom: 15px;
+    color: #666;
+    line-height: 1.8;
+}
+
+.about-details p:last-child {
+    margin-bottom: 0;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .about {
+        padding: 0 0;
+    }
+
+    .about h3 {
+        font-size: 1.8rem;
+    }
+
+    .about-brief,
+    .about-details p {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+
+    .about-toggle {
+        width: 80%;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* 主容器样式 */
+.location-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.location-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 左侧信息区域 */
+.location-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.location-info h2 {
+    color: #0f123a;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.location-address {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.info-section {
+    margin-bottom: 30px;
+}
+
+.info-section h3 {
+    color: #0f123a;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.info-section h3 i {
+    margin-right: 10px;
+    color: #0f123a;
+}
+
+.info-section p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.info-section a {
+    color: #0f123a;
+    text-decoration: none;
+}
+
+.info-section a:hover {
+    text-decoration: underline;
+}
+
+.operating-hours p strong {
+    color: #0f123a;
+}
+
+/* 右侧地图区域 */
+.location-map {
+    flex: 1;
+    min-width: 300px;
+    height: 450px;
+    /* 桌面端高度 */
+    position: relative;
+    /* 关键：让子元素#map能继承高度 */
+    display: block;
+    overflow: hidden;
+}
+
+/* 补充地图容器基础样式 */
+#map {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    /* 确保最小高度，避免内容为空时消失 */
+}
+
+/* 优化响应式适配 */
+@media (max-width: 768px) {
+    .location-map {
+        height: 350px;
+
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .location-container {
+        padding: 0 15px;
+    }
+}
+
+
+
+/* 移动端调整卡片图标大小 */
+@media (max-width: 768px) {
+    .card-icon i {
+        font-size: 24px !important;
+        /* 移动端图标大小，比桌面端小 */
+    }
+
+    /* 可选：同时调整图标容器大小，保持比例协调 */
+    .card-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+/* 确保新按钮样式一致 */
+.quote-btn.inquiry-btn {
+    margin: 10px;
+    height: 50px;
+    /* 可以根据需要调整样式 */
+}
+
+/* 确保表单样式正确 */
+#inquiryFormContainer .form-group {
+    margin-bottom: 15px;
+}
+
+#inquiryFormContainer textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+
+
+/* 响应式调整 h3 字体大小 - 针对移动端 */
+@media (max-width: 768px) {
+    h3 {
+        font-size: 1.1rem !important;
+        /* 移动端字体大小，可根据需要调整 */
+    }
+}
+
+
+
+
+
+html {
+    /* background-image: url('https://cdn.lugc.link/dd8b249a-8e5d-43f2-ae5e-92f071457dc9/-/format/auto/'); */
+    background-image: url('../../static/images/truck6_hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+
+
+
+/* 导航样式 */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    padding: 5px 0;
+    position: relative;
+}
+
+.main-nav a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s;
+}
+
+.main-nav a:hover:after {
+    width: 100%;
+}
+
+/* 头部按钮区域 */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-btn {
+    height: 50px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* 调整响应式布局 */
+@media (max-width: 992px) {
+    .main-nav {
+        display: none;
+        /* 在中等屏幕下隐藏导航，可根据需要添加汉堡菜单 */
+    }
+
+    .header .container {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .phone-link {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/*弹窗*/
+/* 弹窗背景遮罩 */
+/* 弹窗背景遮罩 - 关键修复 */
+.modal-overlay {
+    position: fixed;
+    /* 相对于视口固定定位，不受页面滚动影响 */
+    top: 0;
+    left: 0;
+    right: 0;
+    /* 新增：确保覆盖整个宽度 */
+    bottom: 0;
+    /* 新增：确保覆盖整个高度 */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    z-index: 1002;
+    /* 确保在所有元素上方 */
+    padding: 20px;
+    overflow: auto;
+    /* 防止弹窗内容过长时无法滚动 */
+}
+
+/* 弹窗内容容器 - 关键修复 */
+.modal {
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    /* 限制最大宽度 */
+    max-height: 90vh;
+    /* 限制最大高度，避免超出屏幕 */
+    overflow-y: auto;
+    /* 内容过长时可滚动 */
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+    margin: auto;
+    /* 确保在flex容器中居中 */
+}
+
+/* 弹窗动画 */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 关闭按钮 */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #000;
+}
+
+/* 弹窗标题 */
+.modal h3 {
+    padding: 20px 20px 10px;
+    margin: 0;
+    color: #0f123a;
+    border-bottom: 1px solid #eee;
+}
+
+/* 弹窗内表单样式 */
+.modal .quote-form {
+    margin: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+
+/* 确保图片保持原始比例并自适应容器 */
+/* 确保图片容器在父元素中居中 */
+.about-image {
+    max-width: 600px;
+    margin: 0 auto;
+    /* 关键：通过margin自动居中 */
+    display: block;
+    /* 改为block布局更适合图片容器 */
+}
+
+/* 优化图片样式 */
+.about-image .about-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* 保持比例的同时填充容器 */
+    /* 移除flex相关属性，图片是块级元素不需要flex */
+}
+
+
+
+/* 导航1：顶部联系信息栏 */
+.header-top {
+    background-color: #f8f9fa;
+    /* 浅色背景 */
+    padding: 8px 0;
+    /* 较扁的高度 */
+    color: #333;
+    font-size: 0.9rem;
+    position: static;
+}
+
+.header-top .contact-info {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.header-top .contact-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-top .contact-info i {
+    color: #0f123a;
+    /* 主题色图标 */
+}
+
+/* 导航2：主导航栏 */
+.header-main {
+    background-color: #0f123a;
+    /* 深色背景，与导航1区分 */
+    padding: 3px 0;
+    /* 更高的高度 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: static;
+    z-index: 999;
+}
+
+.header-main .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-main .logo {
+    height: 80px;
+    /* 适当增大logo */
+}
+
+/* PC端样式（屏幕宽度≥769px） */
+@media (min-width: 769px) {
+
+    /* 两个导航栏都设置为固定定位，跟随滚动 */
+    .header-top,
+    .header-main {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    /* 主导航栏位于联系信息栏下方 */
+    .header-main {
+        top: 36px;
+        /* 与header-top高度匹配 */
+    }
+
+    /* 给页面主体添加顶部间距，避免内容被固定导航遮挡 */
+    body {
+        padding-top: 36px + 70px;
+        /* 两个导航栏高度之和 */
+    }
+}
+
+/* 移动端样式（屏幕宽度≤768px） */
+@media (max-width: 768px) {
+
+    /* 保持移动端固定定位设置 */
+    .header-top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        font-size: 0.75rem;
+        display: none;
+    }
+
+    .header-main {
+        position: fixed;
+        top: 0px;
+        /* 位于导航1下方 */
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    /* 导航1信息在一行显示 */
+    .contact-info {
+        gap: 8px !important;
+        /* 减小间距 */
+        white-space: nowrap;
+        /* 禁止换行 */
+        overflow: hidden;
+        /* 隐藏溢出 */
+        text-overflow: ellipsis;
+        /* 溢出显示省略号 */
+    }
+}
+
+
+
+/* 响应式调整 */
+/* @media (max-width: 768px) {
+    .header-top .contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.75rem;
+    }
+
+    .header-main .container {
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+    }
+} */
