@@ -1,0 +1,1 @@
+web: gunicorn freight_solutions.wsgi --log-file -
