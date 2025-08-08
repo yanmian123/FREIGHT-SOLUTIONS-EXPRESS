@@ -1,0 +1,702 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="true">
+    <title>FREIGHT SOLUTIONS EXPRESS PTY LTD - Freight Solutions</title>
+    <!-- 引入字体 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Lato:wght@300;400;700&family=Raleway:wght@300;400;700&family=Montserrat:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- 懒加载库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+
+        {% comment %} <!-- 在head标签内添加 -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> {% endcomment %}
+
+    {% comment %} <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=3d6745bfaeee29696567a10480f8032b"></script> {% endcomment %}
+</head>
+
+<body>
+    <!-- 头部区域 -->
+    {% comment %} <header class="header">
+        <div class="container">
+            <img src="" alt=" Logo" class="logo">
+            <a href="tel:0449704140" class="phone-link">tel:0449 704 140</a>
+            <div class="tagline">Tailored <b>Multi-Carrier</b> Solutions</div>
+        </div>
+    </header> {% endcomment %}
+
+<!-- 在<body>标签内添加弹窗容器 -->
+<!-- GET A QUOTE 弹窗 -->
+<div id="quoteModal" class="modal-overlay">
+    <div class="modal">
+        <button class="close-modal">&times;</button>
+        <h3>Get a Quote</h3>
+        <form class="quote-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Your company name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_email">Phone / Email</label>
+                <input type="text" id="phone_email" name="phone_email" placeholder="Phone number or email address" required>
+            </div>
+            <div class="form-group">
+                <label for="pickup_location">Pickup Location</label>
+                <input type="text" id="pickup_location" name="pickup_location" placeholder="Where is the load picked up?" required>
+            </div>
+            <div class="form-group">
+                <label for="dropoff_location">Dropoff Location</label>
+                <input type="text" id="dropoff_location" name="dropoff_location" placeholder="Where is the load delivered?" required>
+            </div>
+            <div class="form-group">
+                <label for="load_size">Load Size</label>
+                <input type="text" id="load_size" name="load_size" placeholder="e.g. 20ft container, pallet, etc." required>
+            </div>
+            <div class="form-group">
+                <label for="load_weight">Load Weight (approx)</label>
+                <input type="text" id="load_weight" name="load_weight" placeholder="e.g. 500kg, 2 tons">
+            </div>
+            <div class="form-group">
+                <label for="preferred_datetime">Preferred Date/Time</label>
+                <input type="text" id="preferred_datetime" name="preferred_datetime" placeholder="When do you need shipping?">
+            </div>
+            <div class="form-group">
+                <label for="additional_notes">Additional Notes</label>
+                <textarea id="additional_notes" name="additional_notes" placeholder="Any other details we should know?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">GET A QUOTE</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- ASK A QUESTION 弹窗 -->
+<div id="inquiryModal" class="modal-overlay">
+    <div class="modal">
+        <button class="close-modal">&times;</button>
+        <h3>Ask a Question</h3>
+        <form class="quote-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name_inquiry">Name</label>
+                <input type="text" id="id_name_inquiry" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_phone_email_inquiry">Phone / Email</label>
+                <input type="text" id="id_phone_email_inquiry" name="phone_email" placeholder="Phone number or email address" required>
+            </div>
+            <div class="form-group">
+                <label for="id_additional_notes_inquiry">Your Inquiry</label>
+                <textarea id="id_additional_notes_inquiry" name="additional_notes" placeholder="Please describe your inquiry..."></textarea>
+            </div>
+            <button type="submit" name="inquiry_submit" class="submit-btn">SEND INQUIRY</button>
+        </form>
+    </div>
+</div>
+
+
+    {% comment %} <!-- 头部区域 -->
+<header class="header">
+    <div class="container">
+        <img src="static\images\Logo.jpg" alt="logo_FREIGHT_SOLUTIONS_EXPRESS" class="logo">
+        
+        <!-- 导航链接 -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <!-- 功能按钮 -->
+<div class="header-actions">
+    <button id="toggleQuoteForm" class="quote-btn header-btn">GET A QUOTE</button>
+    <button id="toggleInquiryForm" class="quote-btn header-btn inquiry-btn">ASK A QUESTION</button>
+    <a href="tel:0449704140" class="phone-link">tel:0449 704 140</a>
+</div>
+    </div>
+</header> {% endcomment %}
+
+<!-- 导航1：顶部联系信息栏 -->
+<header class="header-top">
+    <div class="container">
+        <div class="contact-info">
+            <span><i class="fas fa-phone"></i> +61:0449 704 140</span>
+            <span><i class="fas fa-envelope"></i> freightsol.express@gmail.com</span>
+            <span><i class="fas fa-map-marker-alt"></i> U 5 27 Rd Lakemba NSW 2195</span>
+        </div>
+    </div>
+</header>
+
+<!-- 导航2：主导航栏（包含logo和跳转链接） -->
+<header class="header-main">
+    <div class="container">
+        <img src="static\images\Logo.jpg" alt="logo_FREIGHT_SOLUTIONS_EXPRESS" class="logo">
+        
+        <!-- 导航链接 -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">FAQs</a></li>
+                <li><a href="#welcome">Customers</a></li> 
+                <li><a href="#company-info">Location</a></li>  
+                <li><a href="#why-choose-us">Advantages</a></li> 
+                <li><a href="#contact">Contact</a></li>
+                
+            </ul>
+        </nav>
+        
+        <!-- 功能按钮 -->
+        <div class="header-actions">
+            <button id="toggleQuoteForm" class="quote-btn header-btn">GET A QUOTE</button>
+            <button id="toggleInquiryForm" class="quote-btn header-btn inquiry-btn">CONSULTATION</button>
+        </div>
+    </div>
+</header>
+
+
+ <!-- 英雄区 -->
+<section class="hero">
+    <div class="container">
+        <!-- 改为动态获取 -->
+        <h1>FREIGHT SOLUTIONS EXPRESS</h1>
+        <h2>Reliable Freight Transport Across Sydney & Beyond</h2>
+        <!-- 显示/隐藏表单的按钮 -->
+        <button id="heroToggleQuoteForm" class="quote-btn">GET A QUOTE</button>
+        
+        <div class="hero-info">
+            <p><b>We Handle Everything For You</b></p>
+            <p>Leave your contact details and one of our logistics experts will get in touch with you shortly!</p>
+        </div>
+<!-- 在<body>标签内添加弹窗容器 -->
+<!-- GET A QUOTE 弹窗 -->
+{% comment %} <div id="quoteModal" class="modal-overlay">
+    <div class="modal">
+        <button class="close-modal">&times;</button>
+        <h3>Get a Quote</h3>
+        <form class="quote-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Your company name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_email">Phone / Email</label>
+                <input type="text" id="phone_email" name="phone_email" placeholder="Phone number or email address" required>
+            </div>
+            <div class="form-group">
+                <label for="pickup_location">Pickup Location</label>
+                <input type="text" id="pickup_location" name="pickup_location" placeholder="Where is the load picked up?" required>
+            </div>
+            <div class="form-group">
+                <label for="dropoff_location">Dropoff Location</label>
+                <input type="text" id="dropoff_location" name="dropoff_location" placeholder="Where is the load delivered?" required>
+            </div>
+            <div class="form-group">
+                <label for="load_size">Load Size</label>
+                <input type="text" id="load_size" name="load_size" placeholder="e.g. 20ft container, pallet, etc." required>
+            </div>
+            <div class="form-group">
+                <label for="load_weight">Load Weight (approx)</label>
+                <input type="text" id="load_weight" name="load_weight" placeholder="e.g. 500kg, 2 tons">
+            </div>
+            <div class="form-group">
+                <label for="preferred_datetime">Preferred Date/Time</label>
+                <input type="text" id="preferred_datetime" name="preferred_datetime" placeholder="When do you need shipping?">
+            </div>
+            <div class="form-group">
+                <label for="additional_notes">Additional Notes</label>
+                <textarea id="additional_notes" name="additional_notes" placeholder="Any other details we should know?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">GET A QUOTE</button>
+        </form>
+    </div>
+</div> {% endcomment %}
+
+
+<!-- 在英雄区现有按钮附近添加 -->
+<button id="heroToggleInquiryForm" class="quote-btn">CONSULTATION</button>
+
+
+
+    </div>
+</section>
+
+
+<!-- 关于我们公司-->
+<section class="about" id="about">
+    <div class="container">
+        <h3>ABOUT US</h3>
+        <p class="about-brief">Freight Solutions Express is a Sydney-based, Australian-owned freight transport company offering reliable and efficient delivery services across local and interstate routes.
+             With a skilled team, modern fleet, and customer-first mindset, we move goods with precision, safety, and accountability.</p>
+        
+        <!-- 新增：展开/收起按钮 -->
+        <button class="about-toggle">Learn More</button>
+        {% comment %} <img src="static\images\truck2.jpg" alt="图片描述" width="364px" height="258px"> {% endcomment %}
+        <div class="about-image">
+        <!-- 注意：src 替换为你的实际图片路径 -->
+        <img src="{% static 'images\truck2.jpg' %}" 
+            alt="Freight Solutions Express truck" 
+            class="about-img">
+        </div>
+        <!-- 新增：详细内容容器（默认隐藏） -->
+                <div class="about-details">
+            <h4>Our Company</h4>
+            <p>Freight Solutions Express is an independently owned transport company based in Sydney, trusted for delivering reliable freight services across both local and interstate routes. Backed by proven industry experience, we operate a skilled team of professional drivers and a modern, well-maintained fleet.</p>
+            <p>We use advanced tracking systems to provide transparent, on-time deliveries — because we know how critical timing is in logistics. Proudly Australian-owned and operated, we tailor every job to meet our clients’ needs, with a commitment to safety, service, and efficiency.</p>
+            
+            <h4>Mission Statement</h4>
+            <p>We operate with integrity, consistency, and high standards in every job we take on. Our mission is to exceed customer expectations by delivering value-driven freight solutions that maximise load efficiency and keep costs competitive.</p>
+            
+            <h4>Vision Statement</h4>
+            <p>To be the preferred freight transport provider in Australia, known for delivering dependable service, lasting partnerships, and outstanding results.</p>
+            
+            <h4>Our Values</h4>
+            <p>• Service – We go beyond expectations to build strong, long-term client relationships through dependable and collaborative service.</p>
+            <p>• Quality – We uphold strict operational standards to ensure every delivery is completed safely, efficiently, and without incident.</p>
+            <p>• Satisfaction – We aim for excellence at every stage to ensure a positive experience and lasting trust.</p>
+            <p>• Reliability – We deliver on our promises with consistency, honesty, and commitment to client success.</p>
+            <p>• Innovation – We embrace technology and continuous improvement to streamline operations and stay ahead in the industry.</p>
+            <p>• Safety – We prioritise the wellbeing of our drivers, clients, and the public through rigorous safety protocols and compliance.</p>
+            <p>• Sustainability – We are committed to reducing our environmental impact through responsible practices and smarter logistics.</p>
+        <div class="about-image">
+        <!-- 注意：src 替换为你的实际图片路径 -->
+        <img src="{% static 'images\teamloading.jpg' %}" 
+            alt="Freight Solutions Express teamloading" 
+            class="about-img">
+        </div>
+    </div>
+    </div>
+
+</section>
+
+
+
+<!-- 服务类型（仅保留4项核心服务） -->
+<section class="service-types" id="services">
+    <h3>THE SERVICES WE PROVIDE
+    </h3>
+    <div class="container">
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h4>LOCAL FREIGHT TRANSPORT</h4>
+                <p>Same-day or next-day delivery across the Sydney metro area.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-road"></i>
+                </div>
+                <h4>INTERSTATE FREIGHT TRANSPORT</h4>
+                <p>Reliable linehaul services to major cities and regional areas.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <h4>TAILGATE & PALLET DELIVERY</h4>
+                <p>We handle freight with or without forklifts — including tailgate deliveries for easy unloading.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4>URGENT / EXPRESS FREIGHT</h4>
+                <p>Time-sensitive transport solutions when speed matters.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 流程说明 -->
+    <section class="process" id="process">
+        <div class="container">
+            <h3>FAQs</h3>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h4>How soon can you deliver?</h4>
+                    <p>Local Freight Transport<br>
+                        Same-day or next-day delivery across the Sydney metro area</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h4>What areas do you cover?</h4>
+                    <p>Interstate Freight Transport<br>
+                       Reliable linehaul services to major cities and regional areas</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h4>Do you have tailgate services?</h4>
+                    <p> Tailgate & Pallet Delivery<br>We handle freight with or without forklifts — including tailgate deliveries for easy unloading</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="services" id="welcome">
+    <h3>WE WELCOME ANYONE WHO NEEDS A SHIPMENT</h3>
+    <div class="container">
+        <div class="cards-grid">
+            <!-- 卡片1 -->
+            <div class="card" style="background-color: #0f123a;">
+                <div class="card-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                {% comment %} <img src="https://images.pexels.com/photos/261628/pexels-photo-261628.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Small to medium-sized businesses" class="service-img"> {% endcomment %}
+                <h4>Small & Medium Businesses</h4>
+                <p>Businesses in need of regular or one-off freight transportation services</p>
+            </div>
+            
+            <!-- 卡片2 -->
+            <div class="card" style="background-color: #f8f9fa;">
+                <div class="card-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                {% comment %} <img src="https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Logistics professionals" class="service-img"> {% endcomment %}
+                <h4>Logistics Professionals</h4>
+                <p>Logistics managers, warehouse coordinators, or supply chain teams</p>
+            </div>
+            
+            <!-- 卡片3 -->
+            <div class="card" style="background-color: #0f123a;">
+                <div class="card-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                {% comment %} <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Sydney-based companies" class="service-img"> {% endcomment %}
+                <h4>Sydney-Based Companies</h4>
+                <p>Local businesses seeking trustworthy, Australian-owned freight partners</p>
+            </div>
+            
+            <!-- 新增卡片4 -->
+            <div class="card" style="background-color: #f8f9fa;">
+                <div class="card-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                {% comment %} <img src="https://images.pexels.com/photos/433335/pexels-photo-433335.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Target industries" class="service-img"> {% endcomment %}
+                <h4>Specific Industries</h4>
+                <p>Retail, manufacturing, wholesale, and construction sectors</p>
+            </div>
+            
+            <!-- 新增卡片5 -->
+            <div class="card" style="background-color: #0f123a;">
+                <div class="card-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                {% comment %} <img src="https://images.pexels.com/photos/433335/pexels-photo-433335.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Urgent freight needs" class="service-img"> {% endcomment %}
+                <h4>Urgent Shippers</h4>
+                <p>Businesses requiring time-sensitive or express delivery solutions</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% comment %} 我们在哪里，展示地图 {% endcomment %}
+{% comment %} <section class="map-section">
+    <div class="container">
+        <h3>OUR LOCATION</h3>
+        <div id="amap-container" class="map-container"></div>
+    </div>
+</section> {% endcomment %}
+
+<!-- 1. 引入所需库 -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+<!-- 3. 位置信息和地图容器 -->
+<section class="location-section" id="company-info">
+  <div class="location-container">
+    <!-- 左侧：地址和联系方式 -->
+    <div class="location-info">
+      <h2>FREIGHT SOLUTIONS EXPRESS PTY LTD</h2>
+      
+      <div class="location-address">
+        <p>U 5 27 Rd Lakemba NSW 2195</p>
+      </div>
+      
+      <div class="info-section contact-details">
+        <h4><i class="fas fa-phone-alt"></i> Contact Number</h4>
+        <p>0449 704 140</p>
+        
+        <h4><i class="fas fa-envelope"></i> Email</h4>
+        <p>Operations: <a href="mailto:freightsol.express@gmail.com">freightsol.express@gmail.com</a></p>
+      
+      
+        <h4><i class="fas fa-clock"></i> Operating Hours</h4>
+        <p>Monday - Friday</p>
+        
+        <p><strong>Operations</strong><br>
+        7:00 AM - 6:00 PM</p>
+        
+        <p><strong>Customer Service</strong><br>
+        9:00 AM - 6:00 PM</p>
+</div>
+    </div>
+    
+    <!-- 右侧：地图容器 -->
+    <div class="location-map">
+      <div id="map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 初始化地图 -->
+<script>
+  // 目标地址经纬度（Wetherill Park, NSW 2164 - 490 Victoria Street）
+  const coordinates = [-33.9217, 151.0782]; 
+
+  // 创建地图（设置初始视图和缩放级别）
+  const map = L.map('map').setView(coordinates, 15); 
+
+  // 添加 OpenStreetMap 图层
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // 添加公司位置标记和弹窗
+  L.marker(coordinates).addTo(map)
+    .bindPopup('<b>FREIGHT SOLUTIONSEXPRESS</b><br>U 5 27 Rd Lakemba NSW 2195')
+    .openPopup();
+</script>
+
+
+
+    <!-- 新增：客户选择理由模块 -->
+    <!-- 优化后的客户选择理由模块 -->
+    <section class="client-choose"  id="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>WHY CLIENTS CHOOSE PREMIAIR FREIGHT</h2>
+                <div class="divider"></div> <!-- 标题下划线 -->
+            </div>
+
+            <div class="reasons-container">
+                <!-- 理由卡片 1 -->
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3>Extensive Industry Experience</h3>
+                        <p>We’ve built our reputation on expertise and reliability.Backed by proven industry experience, we operate a skilled team of professional drivers and a modern, well-maintained fleet.</p>
+                    </div>
+                </div>
+
+                <!-- 理由卡片 2 -->
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3>Fast & Reliable Service</h3>
+                        <p>We know how important it is to deliver on time. That's why we offer fast and reliable road freight services that you can trust</p>
+                    </div>
+                </div>
+
+                <!-- 理由卡片 3 -->
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3>Professionalism & Commitment</h3>
+                        <p>Our dedicated freight specialists are focused on delivering smooth, worry-free experiences.
+                            From customs to cargo handling, we operate with precision and care.</p>
+                    </div>
+                </div>
+
+                <!-- 理由卡片 4 -->
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3>Transparent Reporting</h3>
+                        <p>We keep you informed at every step. From shipment tracking to detailed delivery reports,
+                            you’ll always know where your goods are and what’s next.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- 客户评价（文档中的示例评价） -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <h3>WHAT OUR CLIENTS SAY</h3>
+        <p class="testimonial-intro">We’re committed to delivering reliable, transparent, and cost-effective freight services — and it shows in our results.</p>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <p>Freight Solutions Express has been our go-to for Sydney freight — always reliable, always on time.</p>
+                <p class="author">Ethan Davis, Logistics Manager, Private Limited </p>
+                <img src="https://images.assets-landingi.com/uc/f79502e8-8a45-4daf-8dbe-a7e1fcbbdef4/fivestarsiconontransparentbackgroundfreepng.webp" alt="5 Stars" class="stars">
+            </div>
+            <div class="testimonial-card">
+                <p>Professional, communicative, and efficient. It’s a relief to work with a company that does exactly what they promise.</p>
+                <p class="author">Lucas Miller, Warehouse Supervisor</p>
+                <img src="https://images.assets-landingi.com/uc/f79502e8-8a45-4daf-8dbe-a7e1fcbbdef4/fivestarsiconontransparentbackgroundfreepng.webp" alt="5 Stars" class="stars">
+            </div>
+            <div class="testimonial-card">
+                <p>From pickup to delivery, they handled everything with care and precision. Highly recommend.</p>
+                <p class="author">Oliver Brown, Small Business Owner</p>
+                <img src="https://images.assets-landingi.com/uc/f79502e8-8a45-4daf-8dbe-a7e1fcbbdef4/fivestarsiconontransparentbackgroundfreepng.webp" alt="5 Stars" class="stars">
+            </div>
+        </div>
+        <div class="rating-summary">
+            <p>Rated 4.9/5 based on 72 Google Reviews</p>
+            <p>Rated 5/5 based on 21 Facebook Reviews</p>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- 联系区域 -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h3>Avoid the stress of freight transport — let us handle it!</h3>
+            <div class="cta-buttons">
+
+                <a href="#hero" class="form-btn">fill out the form</a>
+            </div>
+<!-- 固定ABN和地址（文档中的注册信息） -->
+        <p>ABN: 62 648 589 459 | ABN registration date: 18/02/2021 | Address: U 5 27 Rd Lakemba NSW 2195</p>
+                        <a> tel：+61:0449 704 140</a><br>
+                        <a> Email：freightsol.express@gmail.com</a>
+        
+    </section>
+
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>Business Hours: Monday-Friday: 7:00 AM - 6:00 PM</p>
+            <p>Business activity : 46100 - Road freight transport service</p>
+            <p>No matter the destination or type of cargo, we deliver personalised and high-quality logistics solutions.
+                We’re committed to helping your business move smoothly, securely, and on time — with a fully managed
+                freight experience.</p>
+            <div class="copyright">© 2025 FREIGHT SOLUTIONSEXPRESS PTY LTD | All Rights Reserved |
+                Freight & Logistics Experts</div>
+        </div>
+    </footer>
+
+    <!-- 引入脚本 -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+<script>
+// 处理表单显示/隐藏
+ {% comment %} document.getElementById('toggleQuoteForm').addEventListener('click', function() {
+    const quoteForm = document.getElementById('quoteFormContainer');
+    quoteForm.classList.toggle('active');
+    
+    // 如果显示询价表单则隐藏咨询表单
+    const inquiryForm = document.getElementById('inquiryFormContainer');
+    if (inquiryForm.classList.contains('active')) {
+        inquiryForm.classList.remove('active');
+    }
+});
+
+document.getElementById('toggleInquiryForm').addEventListener('click', function() {
+    const inquiryForm = document.getElementById('inquiryFormContainer');
+    inquiryForm.classList.toggle('active');
+    
+    // 如果显示咨询表单则隐藏询价表单
+    const quoteForm = document.getElementById('quoteFormContainer');
+    if (quoteForm.classList.contains('active')) {
+        quoteForm.classList.remove('active');
+    }
+}); {% endcomment %}
+
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80, // 减去头部高度，避免被遮挡
+                behavior: 'smooth'
+            });
+        }
+    });
+}); 
+// 获取弹窗元素
+const quoteModal = document.getElementById('quoteModal');
+const inquiryModal = document.getElementById('inquiryModal');
+const toggleQuoteBtn = document.getElementById('toggleQuoteForm');
+const toggleInquiryBtn = document.getElementById('toggleInquiryForm');
+const closeButtons = document.querySelectorAll('.close-modal');
+
+
+
+// 打开询价弹窗
+toggleQuoteBtn.addEventListener('click', function() {
+    quoteModal.style.display = 'flex';
+    //document.body.style.overflow = 'hidden'; // 防止背景滚动
+});
+
+// 打开咨询弹窗
+toggleInquiryBtn.addEventListener('click', function() {
+    inquiryModal.style.display = 'flex';
+    //document.body.style.overflow = 'hidden'; // 防止背景滚动
+});
+
+// 关闭弹窗
+closeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        quoteModal.style.display = 'none';
+        inquiryModal.style.display = 'none';
+        document.body.style.overflow = ''; // 恢复背景滚动
+    });
+});
+
+// 点击弹窗外部关闭
+window.addEventListener('click', function(event) {
+    if (event.target === quoteModal) {
+        quoteModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    if (event.target === inquiryModal) {
+        inquiryModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+});
+
+// 按ESC键关闭弹窗
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        quoteModal.style.display = 'none';
+        inquiryModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+});
+</script>
+</html>
