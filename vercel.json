@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "freight_solutions/wsgi.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "freight_solutions/wsgi.py"
+        }
+    ]
+}
