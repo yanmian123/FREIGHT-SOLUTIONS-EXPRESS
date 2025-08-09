@@ -17,14 +17,88 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- 懒加载库 -->
 <style>
-    html {
-        background-image: url("{% static 'images/hero_.jpg' %}");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-    }
-</style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+        
+        /* 确保在所有设备上正确显示背景图 */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #0f123a; /* 回退背景色 */
+        }
+        
+        /* 背景图片容器 */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        
+        /* 移动设备上的特殊处理 */
+        @media (max-width: 768px) {
+            /* iOS Safari 特殊处理 */
+            @supports (-webkit-overflow-scrolling: touch) {
+                .hero-bg {
+                    background-attachment: scroll;
+                }
+            }
+            
+            /* 固定背景的替代方案 */
+            .hero-bg {
+                position: fixed;
+            }
+        }
+        
+        /* 桌面设备上的固定背景 */
+        @media (min-width: 769px) {
+            .hero-bg {
+                background-attachment: fixed;
+            }
+        }
+        
+        /* 半透明遮罩层 */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+        
+        /* 内容容器 */
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 
         {% comment %} <!-- 在head标签内添加 -->
@@ -184,6 +258,8 @@
 
  <!-- 英雄区 -->
 <section class="hero">
+            <!-- 背景图片容器 -->
+        <div class="hero-bg" style="background-image: url('{% static 'images/hero_.jpg' %}');"></div>
     <div class="container">
         <!-- 改为动态获取 -->
         <h1>FREIGHT SOLUTIONS EXPRESS</h1>
@@ -195,61 +271,9 @@
             <p><b>We Handle Everything For You</b></p>
             <p>Leave your contact details and one of our logistics experts will get in touch with you shortly!</p>
         </div>
-<!-- 在<body>标签内添加弹窗容器 -->
-<!-- GET A QUOTE 弹窗 -->
-{% comment %} <div id="quoteModal" class="modal-overlay">
-    <div class="modal">
-        <button class="close-modal">&times;</button>
-        <h3>Get a Quote</h3>
-        <form class="quote-form" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-                <label for="company">Company</label>
-                <input type="text" id="company" name="company" placeholder="Your company name" required>
-            </div>
-            <div class="form-group">
-                <label for="phone_email">Phone / Email</label>
-                <input type="text" id="phone_email" name="phone_email" placeholder="Phone number or email address" required>
-            </div>
-            <div class="form-group">
-                <label for="pickup_location">Pickup Location</label>
-                <input type="text" id="pickup_location" name="pickup_location" placeholder="Where is the load picked up?" required>
-            </div>
-            <div class="form-group">
-                <label for="dropoff_location">Dropoff Location</label>
-                <input type="text" id="dropoff_location" name="dropoff_location" placeholder="Where is the load delivered?" required>
-            </div>
-            <div class="form-group">
-                <label for="load_size">Load Size</label>
-                <input type="text" id="load_size" name="load_size" placeholder="e.g. 20ft container, pallet, etc." required>
-            </div>
-            <div class="form-group">
-                <label for="load_weight">Load Weight (approx)</label>
-                <input type="text" id="load_weight" name="load_weight" placeholder="e.g. 500kg, 2 tons">
-            </div>
-            <div class="form-group">
-                <label for="preferred_datetime">Preferred Date/Time</label>
-                <input type="text" id="preferred_datetime" name="preferred_datetime" placeholder="When do you need shipping?">
-            </div>
-            <div class="form-group">
-                <label for="additional_notes">Additional Notes</label>
-                <textarea id="additional_notes" name="additional_notes" placeholder="Any other details we should know?"></textarea>
-            </div>
-            <button type="submit" class="submit-btn">GET A QUOTE</button>
-        </form>
-    </div>
-</div> {% endcomment %}
-
 
 <!-- 在英雄区现有按钮附近添加 -->
 <button id="heroToggleInquiryForm" class="quote-btn">CONSULTATION</button>
-
-
-
     </div>
 </section>
 
