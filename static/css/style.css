@@ -1077,6 +1077,24 @@ body {
 }
 
 
+#additional_notes {
+    width: 100%;
+    /* 宽度占满父容器 */
+    min-height: 120px;
+    /* 最小高度 */
+    resize: vertical;
+    /* 允许垂直拉伸（可选） */
+}
+
+#id_additional_notes_inquiry {
+    width: 100%;
+    /* 宽度占满父容器 */
+    min-height: 120px;
+    /* 最小高度 */
+    resize: vertical;
+    /* 允许垂直拉伸（可选） */
+}
+
 
 /* 响应式调整 h3 字体大小 - 针对移动端 */
 @media (max-width: 768px) {
