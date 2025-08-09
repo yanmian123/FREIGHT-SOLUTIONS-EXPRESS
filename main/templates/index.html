@@ -16,6 +16,15 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- 懒加载库 -->
+<style>
+    html {
+        background-image: url("{% static 'images/hero_.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+</style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 
         {% comment %} <!-- 在head标签内添加 -->
@@ -253,7 +262,7 @@
              With a skilled team, modern fleet, and customer-first mindset, we move goods with precision, safety, and accountability.</p>
         
         <!-- 新增：展开/收起按钮 -->
-        <button class="about-toggle">Learn More</button>
+        <button class="about-toggle">Click to expend</button>
         {% comment %} <img src="static\images\truck2.jpg" alt="图片描述" width="364px" height="258px"> {% endcomment %}
         <div class="about-image">
         <!-- 注意：src 替换为你的实际图片路径 -->

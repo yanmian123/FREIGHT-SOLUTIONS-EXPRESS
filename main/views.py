@@ -64,7 +64,7 @@
 
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .forms import ContactForm, QuickInquiryForm
 
 def index(request):
@@ -119,13 +119,30 @@ def index(request):
                     ['freightsol.express@gmail.com'],
                     fail_silently=False,
                 )
-                return HttpResponse('<script>alert("Request submitted successfully! We\'ll contact you shortly."); window.history.back();</script>')
+            #     return HttpResponse('<script>alert("Request submitted successfully! We\'ll contact you shortly."); window.history.back();</script>')
+            # except BadHeaderError:
+            #     return HttpResponse("Invalid header found.")
+            # except Exception as e:
+            #     print(f"Email error: {str(e)}")
+            #     return HttpResponse('<script>alert("Your request was received, but we couldn\'t send the email. Please contact us directly."); window.history.back();</script>')
+                # 返回成功JSON响应
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Request submitted successfully! We\'ll contact you shortly.'
+                })
+                
             except BadHeaderError:
-                return HttpResponse("Invalid header found.")
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Invalid header found. Please try again.'
+                })
+                
             except Exception as e:
                 print(f"Email error: {str(e)}")
-                return HttpResponse('<script>alert("Your request was received, but we couldn\'t send the email. Please contact us directly."); window.history.back();</script>')
-
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Your request was received, but we couldn\'t send the email. Please contact us directly.'
+                })
     return render(request, 'index.html', {        
         'business_info': business_info,  # 传入硬编码的业务信息
         'form': contact_form,

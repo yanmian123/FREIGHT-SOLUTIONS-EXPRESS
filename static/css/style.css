@@ -177,7 +177,7 @@ body {
 .hero-info {
     max-width: 600px;
     margin: 0 auto;
-    background: rgba(0, 0, 0, 0.5);
+    /* background: rgba(0, 0, 0, 0.5); */
     padding: 20px;
     border-radius: 8px;
 }
@@ -1108,14 +1108,13 @@ body {
 
 
 
-html {
-    /* background-image: url('https://cdn.lugc.link/dd8b249a-8e5d-43f2-ae5e-92f071457dc9/-/format/auto/'); */
-    background-image: url('../../static/images/truck6_hero.jpg');
+/* html {
+    background-image: url("{% static 'images/hero_.jpg' %}");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-}
+} */
 
 
 
