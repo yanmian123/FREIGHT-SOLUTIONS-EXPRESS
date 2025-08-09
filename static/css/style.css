@@ -123,7 +123,7 @@ body {
 
 .hero h2 {
     margin-bottom: 40px;
-    font-weight: 400;
+    font-weight: 00;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -1138,7 +1138,7 @@ body {
 }
 
 .main-nav a {
-    color: white;
+    color: #0f123a;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s;
@@ -1190,7 +1190,7 @@ body {
 @media (max-width: 768px) {
     .header-btn {
         padding: 6px 12px;
-        font-size: 0.8rem;
+        /* font-size: 0.8rem; */
     }
 
     .phone-link {
@@ -1311,7 +1311,7 @@ body {
 
 /* 导航1：顶部联系信息栏 */
 .header-top {
-    background-color: #f8f9fa;
+    background-color: #0f123a;
     /* 浅色背景 */
     padding: 8px 0;
     /* 较扁的高度 */
@@ -1331,16 +1331,17 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    color: #e6f0ff;
 }
 
 .header-top .contact-info i {
-    color: #0f123a;
+    color: #e6f0ff;
     /* 主题色图标 */
 }
 
 /* 导航2：主导航栏 */
 .header-main {
-    background-color: #0f123a;
+    background-color: #f9f9f9;
     /* 深色背景，与导航1区分 */
     padding: 3px 0;
     /* 更高的高度 */
@@ -1358,6 +1359,18 @@ body {
 .header-main .logo {
     height: 80px;
     /* 适当增大logo */
+}
+
+/* 更改主导航栏链接字体颜色 */
+.header-main .main-nav a {
+    color: #0f123a;
+    /* 将字体颜色改为白色 */
+}
+
+/* 更改主导航栏按钮字体颜色 */
+.header-main .header-btn {
+    color: #ffffff;
+    /* 将按钮文字颜色改为白色 */
 }
 
 /* PC端样式（屏幕宽度≥769px） */
