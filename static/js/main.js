@@ -1,21 +1,37 @@
-// 新增：表单显示/隐藏功能
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const showFormBtn = document.getElementById('showQuoteForm');
+//     const formContainer = document.getElementById('quoteFormContainer');
+
+//     if (showFormBtn && formContainer) {
+//         showFormBtn.addEventListener('click', function () {
+//             // 显示表单
+//             formContainer.classList.add('active');
+
+//             // 滚动到表单位置
+//             formContainer.scrollIntoView({
+//                 behavior: 'smooth'
+//             });
+
+//             // 隐藏按钮
+//             showFormBtn.style.display = 'none';
+//         });
+//     }
+// });
+
+// 在文档1顶部添加
 document.addEventListener('DOMContentLoaded', function () {
+    // 确保所有报价按钮都有文字
+    document.querySelectorAll('.quote-btn').forEach(btn => {
+        if (!btn.textContent.trim()) {
+            btn.textContent = 'GET A QUOTE';
+        }
+    });
+
+    // 确保特定ID按钮有文字
     const showFormBtn = document.getElementById('showQuoteForm');
-    const formContainer = document.getElementById('quoteFormContainer');
-
-    if (showFormBtn && formContainer) {
-        showFormBtn.addEventListener('click', function () {
-            // 显示表单
-            formContainer.classList.add('active');
-
-            // 滚动到表单位置
-            formContainer.scrollIntoView({
-                behavior: 'smooth'
-            });
-
-            // 隐藏按钮
-            showFormBtn.style.display = 'none';
-        });
+    if (showFormBtn && !showFormBtn.textContent.trim()) {
+        showFormBtn.textContent = 'GET A QUOTE';
     }
 });
 
@@ -40,22 +56,43 @@ document.querySelector('.quote-form').addEventListener('submit', function (e) {
     const formData = new FormData(this);
 
     // 发送 AJAX 请求到 Django 视图
-    fetch(window.location.href, {  // 提交到当前页面的 URL（即 Django 的 index 视图）
+    // fetch(window.location.href, {  // 提交到当前页面的 URL（即 Django 的 index 视图）
+    //     method: 'POST',
+    //     body: formData,
+    //     headers: {
+    //         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value  // 传递 CSRF Token
+    //     }
+    // })
+    //     .then(response => response.text())
+    //     .then(data => {
+    //         alert(data);  // 显示 Django 返回的响应（如 "Submission successful!"）
+    //         this.reset(); // 重置表单
+    //     })
+    //     .catch(error => {
+    //         console.error('提交失败:', error);
+    //         alert('Submission failed. Please try again.');
+    //     });
+
+
+    // 修改现有的fetch请求
+    fetch(window.location.href, {
         method: 'POST',
         body: formData,
         headers: {
-            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value  // 传递 CSRF Token
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
         }
     })
         .then(response => response.text())
         .then(data => {
-            alert(data);  // 显示 Django 返回的响应（如 "Submission successful!"）
-            this.reset(); // 重置表单
+            handleFormResponse(data); // 处理服务器响应
         })
         .catch(error => {
             console.error('提交失败:', error);
             alert('Submission failed. Please try again.');
         });
+
+
+
 });
 
 // 图片懒加载初始化（依赖lazysizes库）
@@ -168,17 +205,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // 导航区按钮（保留原逻辑）
     document.getElementById('toggleQuoteForm').addEventListener('click', function () {
         document.getElementById('quoteModal').style.display = 'block';
+        // 重置表单状态
+        resetFormAndButton(document.querySelector('.quote-form'));
     });
     document.getElementById('toggleInquiryForm').addEventListener('click', function () {
         document.getElementById('inquiryModal').style.display = 'block';
+        // 重置表单状态
+        resetFormAndButton(document.querySelector('.inquiry-form'));
     });
 
     // 新增：英雄区按钮的事件绑定
     document.getElementById('heroToggleQuoteForm').addEventListener('click', function () {
         document.getElementById('quoteModal').style.display = 'block';
+        // 重置表单状态
+        resetFormAndButton(document.querySelector('.quote-form'));
     });
     document.getElementById('heroToggleInquiryForm').addEventListener('click', function () {
         document.getElementById('inquiryModal').style.display = 'block';
+        // 重置表单状态
+        resetFormAndButton(document.querySelector('.inquiry-form'));
     });
 
     // 关闭弹窗的逻辑（假设已有，确保能正常关闭）
@@ -203,3 +248,162 @@ heroToggleInquiryBtn.addEventListener('click', function () {
     inquiryModal.style.display = 'flex';
     // document.body.style.overflow = 'hidden'; // 禁止背景滚动
 });
+
+
+
+// 在现有表单提交处理下方添加
+// document.querySelector('.inquiry-form').addEventListener('submit', function (e) {
+//     e.preventDefault();
+
+
+//     const formData = new FormData(this);
+//     formData.append('inquiry_submit', 'true');  // 明确标识表单类型
+
+//     fetch(window.location.href, {
+//         method: 'POST',
+//         body: formData,
+//         headers: {
+//             'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+//         }
+//     })
+//         .then(response => response.text())
+//         .then(data => {
+//             handleFormResponse(data);
+//         })
+//         .catch(error => {
+//             console.error('提交失败:', error);
+//             alert('Inquiry submission failed. Please try again.');
+//         });
+// });
+
+// // 统一处理响应
+// function handleFormResponse(data) {
+//     const container = document.createElement('div');
+//     container.innerHTML = data;
+//     document.body.appendChild(container);
+
+//     // 执行返回的脚本
+//     const scripts = container.getElementsByTagName('script');
+//     for (let script of scripts) {
+//         eval(script.innerHTML);
+//     }
+
+//     // 移除临时容器
+//     document.body.removeChild(container);
+// }
+
+
+// 重置表单和按钮状态的函数
+function resetFormAndButton(form) {
+    // 重置表单内容
+    form.reset();
+
+    // 恢复按钮状态
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.textContent = submitBtn.dataset.originalText;
+        submitBtn.disabled = false;
+    }
+}
+
+// 报价表单提交处理
+document.querySelector('.quote-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // 获取表单的提交按钮并禁用
+    const submitBtn = this.querySelector('button[type="submit"]');
+    // 保存原始按钮文本
+    if (!submitBtn.dataset.originalText) {
+        submitBtn.dataset.originalText = submitBtn.textContent;
+    }
+    // const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(this);
+
+    fetch(window.location.href, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            handleFormResponse(data);
+            // 提交成功后关闭弹窗
+            document.getElementById('quoteModal').style.display = 'none';
+            // 重置表单和按钮状态
+            setTimeout(() => {
+                resetFormAndButton(this);
+            }, 100);
+        })
+        .catch(error => {
+            console.error('Submission failed:', error);
+            alert('Submission failed. Please try again.');
+            // 恢复按钮状态
+            submitBtn.textContent = submitBtn.dataset.originalText;
+            submitBtn.disabled = false;
+        });
+});
+
+// ASK A QUESTION 表单提交处理
+document.querySelector('.inquiry-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // 获取表单的提交按钮并禁用
+    const submitBtn = this.querySelector('button[type="submit"]');
+    // 保存原始按钮文本
+    if (!submitBtn.dataset.originalText) {
+        submitBtn.dataset.originalText = submitBtn.textContent;
+    }
+    // const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(this);
+    formData.append('inquiry_submit', 'true');  // 明确标识表单类型
+
+    fetch(window.location.href, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            handleFormResponse(data);
+            // 提交成功后关闭弹窗
+            document.getElementById('inquiryModal').style.display = 'none';
+            // 重置表单和按钮状态
+            setTimeout(() => {
+                resetFormAndButton(this);
+            }, 100);
+
+        })
+        .catch(error => {
+            console.error('Submission failed:', error);
+            alert('Inquiry submission failed. Please try again.');
+            // 恢复按钮状态
+            submitBtn.textContent = submitBtn.dataset.originalText;
+            submitBtn.disabled = false;
+        });
+});
+
+// 统一处理响应
+function handleFormResponse(data) {
+    const container = document.createElement('div');
+    container.innerHTML = data;
+    document.body.appendChild(container);
+
+    // 执行返回的脚本
+    const scripts = container.getElementsByTagName('script');
+    for (let script of scripts) {
+        eval(script.innerHTML);
+    }
+
+    // 移除临时容器
+    document.body.removeChild(container);
+}

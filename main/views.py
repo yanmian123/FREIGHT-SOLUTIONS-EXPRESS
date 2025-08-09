@@ -126,23 +126,50 @@ def index(request):
             #     print(f"Email error: {str(e)}")
             #     return HttpResponse('<script>alert("Your request was received, but we couldn\'t send the email. Please contact us directly."); window.history.back();</script>')
                 # 返回成功JSON响应
-                return JsonResponse({
-                    'status': 'success',
-                    'message': 'Request submitted successfully! We\'ll contact you shortly.'
-                })
                 
-            except BadHeaderError:
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Invalid header found. Please try again.'
-                })
+                
+                
+            #     return JsonResponse({
+            #         'status': 'success',
+            #         'message': 'Request submitted successfully! We\'ll contact you shortly.'
+            #     })
+                
+            # except BadHeaderError:
+            #     return JsonResponse({
+            #         'status': 'error',
+            #         'message': 'Invalid header found. Please try again.'
+            #     })
+                
+            # except Exception as e:
+            #     print(f"Email error: {str(e)}")
+            #     return JsonResponse({
+            #         'status': 'error',
+            #         'message': 'Your request was received, but we couldn\'t send the email. Please contact us directly.'
+            #     })
+                success_script = """
+                <script>
+                    alert("Request submitted successfully! We'll contact you shortly.");
+                    document.querySelectorAll('.modal-overlay').forEach(modal => {
+                        modal.style.display = 'none';
+                    });
+                    document.querySelector('.quote-form').reset();
+                    document.querySelector('.inquiry-form').reset();
+                </script>
+                """
+                return HttpResponse(success_script)
                 
             except Exception as e:
-                print(f"Email error: {str(e)}")
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Your request was received, but we couldn\'t send the email. Please contact us directly.'
-                })
+                error_script = f"""
+                <script>
+                    alert("Your request was received, but we couldn't send the email. Please contact us directly. Error: {str(e)}");
+                </script>
+                """
+                return HttpResponse(error_script)                
+                
+                
+                
+                
+                
     return render(request, 'index.html', {        
         'business_info': business_info,  # 传入硬编码的业务信息
         'form': contact_form,

@@ -87,7 +87,7 @@
                 <label for="additional_notes">Additional Notes</label>
                 <textarea id="additional_notes" name="additional_notes" placeholder="Any other details we should know?"></textarea>
             </div>
-            <button type="submit" class="submit-btn">GET A QUOTE</button>
+            <button type="submit" class="submit-btn" data-original-text="GET A QUOTE">GET A QUOTE</button>
         </form>
     </div>
 </div>
@@ -98,7 +98,7 @@
     <div class="modal">
         <button class="close-modal">&times;</button>
         <h3>Ask a Question</h3>
-        <form class="quote-form" method="post">
+        <form class="inquiry-form" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="id_name_inquiry">Name</label>
@@ -112,7 +112,7 @@
                 <label for="id_additional_notes_inquiry">Your Inquiry</label>
                 <textarea id="id_additional_notes_inquiry" name="additional_notes" placeholder="Please describe your inquiry..."></textarea>
             </div>
-            <button type="submit" name="inquiry_submit" class="submit-btn">SEND INQUIRY</button>
+            <button type="submit" name="inquiry_submit" class="submit-btn"  data-original-text="SEND INQUIRY">SEND INQUIRY</button>
         </form>
     </div>
 </div>
@@ -617,30 +617,17 @@
 
     <!-- 引入脚本 -->
     <script src="{% static 'js/main.js' %}"></script>
+    <div id="response-container" style="display:none;"></div>
 </body>
 <script>
-// 处理表单显示/隐藏
- {% comment %} document.getElementById('toggleQuoteForm').addEventListener('click', function() {
-    const quoteForm = document.getElementById('quoteFormContainer');
-    quoteForm.classList.toggle('active');
-    
-    // 如果显示询价表单则隐藏咨询表单
-    const inquiryForm = document.getElementById('inquiryFormContainer');
-    if (inquiryForm.classList.contains('active')) {
-        inquiryForm.classList.remove('active');
+function handleFormResponse(response) {
+    const container = document.getElementById('response-container');
+    container.innerHTML = response;
+    const scripts = container.getElementsByTagName('script');
+    for (let script of scripts) {
+        eval(script.innerHTML);
     }
-});
-
-document.getElementById('toggleInquiryForm').addEventListener('click', function() {
-    const inquiryForm = document.getElementById('inquiryFormContainer');
-    inquiryForm.classList.toggle('active');
-    
-    // 如果显示咨询表单则隐藏询价表单
-    const quoteForm = document.getElementById('quoteFormContainer');
-    if (quoteForm.classList.contains('active')) {
-        quoteForm.classList.remove('active');
-    }
-}); {% endcomment %}
+}
 
 // 平滑滚动
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

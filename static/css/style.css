@@ -140,6 +140,15 @@ body {
     color: #333;
 }
 
+.inquiry-form {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    color: #333;
+}
+
 .form-group {
     margin-bottom: 20px;
     text-align: left;
