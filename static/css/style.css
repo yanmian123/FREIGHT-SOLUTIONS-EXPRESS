@@ -1341,7 +1341,7 @@ body {
 
 /* 导航2：主导航栏 */
 .header-main {
-    background-color: #f9f9f9;
+    background-color: #fdfef8;
     /* 深色背景，与导航1区分 */
     padding: 3px 0;
     /* 更高的高度 */

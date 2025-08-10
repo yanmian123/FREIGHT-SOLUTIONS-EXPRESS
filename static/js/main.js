@@ -1,23 +1,4 @@
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const showFormBtn = document.getElementById('showQuoteForm');
-//     const formContainer = document.getElementById('quoteFormContainer');
-
-//     if (showFormBtn && formContainer) {
-//         showFormBtn.addEventListener('click', function () {
-//             // 显示表单
-//             formContainer.classList.add('active');
-
-//             // 滚动到表单位置
-//             formContainer.scrollIntoView({
-//                 behavior: 'smooth'
-//             });
-
-//             // 隐藏按钮
-//             showFormBtn.style.display = 'none';
-//         });
-//     }
-// });
 
 // 在文档1顶部添加
 document.addEventListener('DOMContentLoaded', function () {
@@ -48,52 +29,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// 表单提交处理（改为 AJAX 方式）
-document.querySelector('.quote-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // 继续阻止默认跳转
-
-    // 获取表单数据
-    const formData = new FormData(this);
-
-    // 发送 AJAX 请求到 Django 视图
-    // fetch(window.location.href, {  // 提交到当前页面的 URL（即 Django 的 index 视图）
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value  // 传递 CSRF Token
-    //     }
-    // })
-    //     .then(response => response.text())
-    //     .then(data => {
-    //         alert(data);  // 显示 Django 返回的响应（如 "Submission successful!"）
-    //         this.reset(); // 重置表单
-    //     })
-    //     .catch(error => {
-    //         console.error('提交失败:', error);
-    //         alert('Submission failed. Please try again.');
-    //     });
 
 
-    // 修改现有的fetch请求
-    fetch(window.location.href, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-        }
-    })
-        .then(response => response.text())
-        .then(data => {
-            handleFormResponse(data); // 处理服务器响应
-        })
-        .catch(error => {
-            console.error('提交失败:', error);
-            alert('Submission failed. Please try again.');
-        });
-
-
-
-});
+// });
 
 // 图片懒加载初始化（依赖lazysizes库）
 if ('lazysizes' in window) {
@@ -250,47 +188,6 @@ heroToggleInquiryBtn.addEventListener('click', function () {
 });
 
 
-
-// 在现有表单提交处理下方添加
-// document.querySelector('.inquiry-form').addEventListener('submit', function (e) {
-//     e.preventDefault();
-
-
-//     const formData = new FormData(this);
-//     formData.append('inquiry_submit', 'true');  // 明确标识表单类型
-
-//     fetch(window.location.href, {
-//         method: 'POST',
-//         body: formData,
-//         headers: {
-//             'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-//         }
-//     })
-//         .then(response => response.text())
-//         .then(data => {
-//             handleFormResponse(data);
-//         })
-//         .catch(error => {
-//             console.error('提交失败:', error);
-//             alert('Inquiry submission failed. Please try again.');
-//         });
-// });
-
-// // 统一处理响应
-// function handleFormResponse(data) {
-//     const container = document.createElement('div');
-//     container.innerHTML = data;
-//     document.body.appendChild(container);
-
-//     // 执行返回的脚本
-//     const scripts = container.getElementsByTagName('script');
-//     for (let script of scripts) {
-//         eval(script.innerHTML);
-//     }
-
-//     // 移除临时容器
-//     document.body.removeChild(container);
-// }
 
 
 // 重置表单和按钮状态的函数
